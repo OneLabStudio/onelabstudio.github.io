@@ -1,48 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OneLab Studio</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-    h1, h2 { color: #333; }
-    a { color: #1a73e8; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    ul { margin-left: 20px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OneLab Studio</title>
+<meta name="description" content="OneLab Studio builds safe, simple and reliable Android apps: OLPlayer music and video player, and QR & Barcode Scanner Pro.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#E9D5FF;--bg2:#E0E7FF;--bg3:#CFFAFE;
+  --text:#1b1530;--muted:#5b5575;
+  --glass:rgba(255,255,255,.55);--glass-line:rgba(255,255,255,.8);
+  --accent:#b01fd1;--accent2:#0aa5b8;--btn-text:#fff;
+  --shadow:0 20px 50px rgba(90,60,160,.18);
+  --font:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg1:#3a0f4a;--bg2:#141238;--bg3:#07303a;
+    --text:#f4effc;--muted:#b9b0d1;
+    --glass:rgba(255,255,255,.08);--glass-line:rgba(255,255,255,.18);
+    --accent:#FC00FF;--accent2:#00DBDE;--btn-text:#10091c;
+    --shadow:0 20px 60px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg1:#3a0f4a;--bg2:#141238;--bg3:#07303a;--text:#f4effc;--muted:#b9b0d1;
+  --glass:rgba(255,255,255,.08);--glass-line:rgba(255,255,255,.18);
+  --accent:#FC00FF;--accent2:#00DBDE;--btn-text:#10091c;--shadow:0 20px 60px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:5rem}
+body{
+  font-family:var(--font);color:var(--text);line-height:1.65;
+  background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3)) fixed;
+  min-height:100vh;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent2);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 1.5rem}
+
+/* header */
+header{position:sticky;top:0;z-index:5;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  background:var(--glass);border-bottom:1px solid var(--glass-line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:4rem}
+.brand{display:flex;align-items:center;gap:.7rem;font-weight:800;text-decoration:none;letter-spacing:-.01em}
+.mark{width:2rem;height:2rem;border-radius:.6rem;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+nav{display:flex;gap:1.5rem;font-weight:500;font-size:.95rem}
+nav a{text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--text)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;padding:5rem 0 4rem}
+h1{font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.05;letter-spacing:-.03em;font-weight:800;max-width:14ch}
+.lead{margin-top:1.4rem;font-size:1.15rem;color:var(--muted);max-width:46ch}
+.cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.btn{display:inline-block;padding:.85rem 1.4rem;border-radius:999px;font-weight:700;text-decoration:none;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));color:var(--btn-text);box-shadow:var(--shadow)}
+.btn.ghost{background:var(--glass);color:var(--text);border:1px solid var(--glass-line);box-shadow:none}
+.btn:hover{filter:brightness(1.06)}
+
+/* player mock (the memorable element) */
+.player{width:min(100%,320px);margin-inline:auto;padding:1.2rem;border-radius:2rem;
+  background:var(--glass);border:1px solid var(--glass-line);box-shadow:var(--shadow);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);transform:rotate(-3deg)}
+.art{aspect-ratio:1;border-radius:1.4rem;position:relative;overflow:hidden;
+  background:radial-gradient(circle at 30% 25%,var(--accent2),transparent 55%),
+  radial-gradient(circle at 75% 80%,var(--accent),transparent 55%),#2a1a55}
+.art::after{content:"";position:absolute;inset:34%;border-radius:50%;
+  border:2px solid rgba(255,255,255,.7);box-shadow:0 0 0 14px rgba(255,255,255,.12)}
+.track{margin-top:1rem;font-weight:700}
+.sub{font-size:.85rem;color:var(--muted)}
+.prog{height:5px;border-radius:5px;background:var(--glass-line);margin:1rem 0 .4rem;overflow:hidden}
+.prog i{display:block;width:38%;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.times{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted)}
+.ctl{display:flex;justify-content:center;align-items:center;gap:1.4rem;margin-top:.9rem}
+.ctl svg{width:1.5rem;height:1.5rem;fill:var(--text)}
+.ctl .play{width:3.4rem;height:3.4rem;border-radius:50%;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.ctl .play svg{fill:var(--btn-text);width:1.4rem;height:1.4rem}
+
+/* sections */
+section{padding:3.5rem 0}
+h2{font-size:clamp(1.7rem,3.5vw,2.4rem);letter-spacing:-.02em;line-height:1.15;margin-bottom:1.5rem}
+.card{background:var(--glass);border:1px solid var(--glass-line);border-radius:1.6rem;padding:2rem;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+.featured{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.featured h3{font-size:1.6rem;letter-spacing:-.02em}
+.featured p{color:var(--muted);margin-top:.7rem}
+.feats{list-style:none;padding:0;display:grid;gap:.7rem;align-content:start}
+.feats li{padding-left:1.6rem;position:relative}
+.feats li::before{content:"";position:absolute;left:0;top:.6em;width:.7rem;height:.7rem;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.second{margin-top:1.5rem}
+.note{font-size:.9rem}
+.feats + .note{margin-top:1.2rem}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.contact dt{font-weight:700}
+.contact dd{color:var(--muted);margin:.15rem 0 1rem;overflow-wrap:anywhere}
+.contact a{color:var(--text)}
+footer{padding:2.5rem 0 3rem;color:var(--muted);font-size:.9rem}
+footer .row{display:flex;flex-wrap:wrap;gap:1rem 2rem;justify-content:space-between;
+  border-top:1px solid var(--glass-line);padding-top:1.5rem}
+footer nav{gap:1.2rem}
+
+@media (max-width:820px){
+  .hero,.featured,.contact{grid-template-columns:1fr}
+  .hero{padding-top:3rem}
+  nav{gap:1rem;font-size:.9rem}
+  .player{transform:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
-  <h1>OneLab Studio</h1>
-  <p>We develop mobile applications and tools for Android users.</p>
+<header>
+  <div class="wrap bar">
+    <a class="brand" href="#top"><span class="mark" aria-hidden="true"></span>OneLab Studio</a>
+    <nav aria-label="Main">
+      <a href="#apps">Apps</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-  <h2>Our App</h2>
-  <p>QR & Barcode Scanner Pro</p>
-  <p>
-    <a href="https://play.google.com/store/apps/details?id=com.onelabstudio.qrscanner.ml" target="_blank">
-      View on Google Play
-    </a>
-  </p>
+<main id="top">
+  <div class="wrap hero">
+    <div>
+      <h1>Android apps that are simple and safe.</h1>
+      <p class="lead">OneLab Studio is an independent developer studio. We build tools for mobile users that are easy to use and reliable every day.</p>
+      <div class="cta">
+        <a class="btn" href="https://play.google.com/store/apps/details?id=com.onelabstudio.videoplayer" target="_blank" rel="noopener">Get OLPlayer</a>
+        <a class="btn ghost" href="#apps">See all apps</a>
+      </div>
+    </div>
+    <div class="player" role="img" aria-label="Illustration of the OLPlayer music screen">
+      <div class="art"></div>
+      <div class="track">Evening Drive</div>
+      <div class="sub">OLPlayer</div>
+      <div class="prog"><i></i></div>
+      <div class="times"><span>1:24</span><span>3:42</span></div>
+      <div class="ctl">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zM9.5 12 18 6v12z"/></svg>
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <svg viewBox="0 0 24 24"><path d="M16 6h2v12h-2zM6 18V6l8.5 6z"/></svg>
+      </div>
+    </div>
+  </div>
 
-  <h2>Contact</h2>
-  <p>
-    Developer Email: <strong>namnguyen.appstudio@gmail.com</strong><br>
-    Support Email: <strong>onelabstudio.support@gmail.com</strong>
-  </p>
+  <section id="apps">
+    <div class="wrap">
+      <h2>Our apps</h2>
+      <article class="card featured">
+        <div>
+          <h3>OLPlayer: Music &amp; Video Player</h3>
+          <p>Music and video in one app. Play the formats you use, tune the sound with the equalizer, and make it yours with glass-style themes.</p>
+          <p class="note">Free to use with ads. OLPlayer Pro is an optional in-app purchase that removes ads and adds premium themes and extra features.</p>
+          <div class="cta"><a class="btn" href="https://play.google.com/store/apps/details?id=com.onelabstudio.videoplayer" target="_blank" rel="noopener">View on Google Play</a></div>
+        </div>
+        <ul class="feats">
+          <li>Plays MP3, FLAC, AAC, MP4, MKV and more</li>
+          <li>Equalizer with preamp, presets and your own saved presets</li>
+          <li>Background playback and sleep timer</li>
+          <li>Download subtitles inside the app</li>
+          <li>Popup player and swipe controls for video</li>
+          <li>PIN protection and Safe Mode for settings, deleting and playlists</li>
+          <li>Light and dark themes with custom backgrounds</li>
+        </ul>
+      </article>
+      <article class="card featured second">
+        <div>
+          <h3>QR &amp; Barcode Scanner Pro</h3>
+          <p>Scan QR codes and barcodes quickly with a smooth, easy-to-use scanner built for everyday use. Your scan history stays organized on your device, and no account is needed.</p>
+          <p class="note">Works well for business, online selling, shopping, event check-in and digital access. Requires Android 6.0 or later.</p>
+          <div class="cta"><a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.onelabstudio.qrscanner.ml" target="_blank" rel="noopener">View on Google Play</a></div>
+        </div>
+        <div>
+          <ul class="feats">
+            <li>Fast, accurate scanning with your camera</li>
+            <li>Create QR codes and barcodes</li>
+            <li>History of scanned and created codes</li>
+            <li>Mark important codes as favorites</li>
+            <li>Copy results, open links and share codes</li>
+            <li>Camera permission only, data stays on your device</li>
+          </ul>
+          <p class="note">Supports QR Code, Code 128, Code 39, Code 93, Codabar, EAN-13, EAN-8, ITF, UPC-A, UPC-E, PDF417, Aztec and Data Matrix.</p>
+        </div>
+      </article>
+    </div>
+  </section>
 
-  <h2>Privacy Policy</h2>
-  <p>
-    <a href="/privacy" target="_blank">View Privacy Policy</a>
-  </p>
+  <section id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <div class="card">
+        <p>OneLab Studio is an independent developer studio creating tools and apps for mobile users. Our goal is to provide safe, easy-to-use and reliable applications.</p>
+      </div>
+    </div>
+  </section>
 
-  <h2>Terms & Conditions</h2>
-  <p>
-    <a href="/terms" target="_blank">View Terms & Conditions</a>
-  </p>
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="card">
+        <p>Questions, feedback or need help with one of our apps? Write to us at
+          <a href="mailto:onelabstudio.support@gmail.com"><strong>onelabstudio.support@gmail.com</strong></a>.</p>
+      </div>
+    </div>
+  </section>
+</main>
 
-  <h2>About</h2>
-  <p>
-    OneLab Studio is an independent developer studio creating tools and apps for mobile users. Our goal is to provide safe, easy-to-use, and reliable applications.
-  </p>
+<footer>
+  <div class="wrap row">
+    <span>© 2026 OneLab Studio</span>
+    <nav aria-label="Legal">
+      <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="/terms" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
