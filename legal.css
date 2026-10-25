@@ -19,7 +19,7 @@
 html{scroll-behavior:smooth;scroll-padding-top:5rem}
 body{
   margin:0;max-width:none;padding:0;font-family:var(--font);color:var(--text);
-  line-height:1.75;font-size:1.125rem;
+  line-height:1.75;font-size:1.06rem;
   background:linear-gradient(160deg,var(--bg1),var(--bg2) 55%,var(--bg3)) fixed;
   min-height:100vh;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 }
@@ -35,14 +35,14 @@ a{color:var(--link);text-underline-offset:3px}
 .site-header nav a{color:var(--muted);text-decoration:none}
 .site-header nav a:hover,.site-header nav a[aria-current]{color:var(--text)}
 
-.doc{max-width:900px;margin:2.5rem auto;padding:3rem 3.2rem 3.5rem;background:var(--sheet);
+.doc{max-width:840px;margin:2.5rem auto;padding:2.8rem 3rem 3.2rem;background:var(--sheet);
   border:1px solid var(--line);border-radius:1.6rem;box-shadow:var(--shadow)}
 .doc h1{font-size:clamp(2rem,5vw,2.8rem);line-height:1.1;letter-spacing:-.03em;margin:0 0 .4rem;color:var(--text)}
-.doc h2{font-size:1.6rem;letter-spacing:-.015em;line-height:1.25;margin:2.6rem 0 .6rem;padding-top:1.6rem;
+.doc h2{font-size:1.5rem;letter-spacing:-.015em;line-height:1.25;margin:2.6rem 0 .6rem;padding-top:1.6rem;
   border-top:1px solid var(--line);color:var(--text)}
 .doc h2.subtitle{font-size:1.1rem;font-weight:500;color:var(--muted);margin:0 0 1.2rem;padding:0;border:0}
-.doc h3{font-size:1.25rem;margin:1.8rem 0 .3rem;color:var(--text)}
-.doc h4{font-size:1.1rem;margin:1.4rem 0 .2rem;color:var(--text)}
+.doc h3{font-size:1.18rem;margin:1.8rem 0 .3rem;color:var(--text)}
+.doc h4{font-size:1.05rem;margin:1.4rem 0 .2rem;color:var(--text)}
 .doc p{margin:.8rem 0;max-width:72ch}
 .doc ul{padding-left:1.3rem;max-width:72ch}
 .doc li{margin:.35rem 0}
@@ -56,15 +56,15 @@ a{color:var(--link);text-underline-offset:3px}
 .toc a{text-decoration:none}
 .toc a:hover{text-decoration:underline}
 
-.site-footer{max-width:900px;margin:0 auto 3rem;padding:0 1.5rem;color:var(--muted);font-size:.9rem;
+.site-footer{max-width:840px;margin:0 auto 3rem;padding:0 1.5rem;color:var(--muted);font-size:.9rem;
   display:flex;flex-wrap:wrap;gap:.8rem 1.6rem;justify-content:space-between}
 .site-footer nav{display:flex;gap:1.2rem}
 .site-footer a{color:var(--muted)}
 
 @media (min-width:1400px){
-  body{font-size:1.2rem}
-  .doc{max-width:980px}
-  .site-footer{max-width:980px}
+  body{font-size:1.1rem}
+  .doc{max-width:900px}
+  .site-footer{max-width:900px}
 }
 @media (max-width:640px){
   .doc{margin:1rem .75rem;padding:1.6rem 1.25rem 2rem;border-radius:1.2rem}
